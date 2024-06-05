@@ -34,7 +34,8 @@ import {storeContext} from '../StoreContext/LoggedStoreContext';
 import axios from 'axios';
 import {useEffect} from 'react';
 import PageTitle from '../components/PageHeader.js';
-import {BearerToken} from '../../BearerTokenContext/TokenContext';
+import {BearerToken} from '../BearerTokenContext/TokenContext.js';
+import {IP} from '../IpAddress/CommonIP';
 
 const BuddyStoreDetails = ({route}) => {
   const {storedata, itemName, itemNumber, category, storeName} = route.params;
@@ -86,7 +87,7 @@ const BuddyStoreDetails = ({route}) => {
   const fetchBuddyStoreData = async () => {
     try {
       const response = await axios.get(
-        `http://172.20.10.9:9022/product/getProductByitemNumber/${itemNumber}/${storeName}`,
+        `${IP}/product/getProductByitemNumber/${itemNumber}/${storeName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -110,7 +111,7 @@ const BuddyStoreDetails = ({route}) => {
     setItemNumber(input);
     try {
       const response = await axios.get(
-        `http://172.20.10.9:9022/product/getMatched/products/itemnumber/${input}`,
+        `${IP}/product/getMatched/products/itemnumber/${input}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -142,7 +143,7 @@ const BuddyStoreDetails = ({route}) => {
     setItemNumber(selectedItemNumber);
     try {
       const response = await axios.get(
-        `http://172.20.10.9:9022/product/getProductByitemNumber/${selectedItemNumber}/${storeName}`,
+        `${IP}/product/getProductByitemNumber/${selectedItemNumber}/${storeName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -160,6 +161,7 @@ const BuddyStoreDetails = ({route}) => {
         setNoDataFound(false);
         navigation.navigate('BuddyStoreSearchedItem', {
           productData: responseData,
+          storeName: storeName,
         });
       }
     } catch (error) {
@@ -194,7 +196,9 @@ const BuddyStoreDetails = ({route}) => {
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
       <Header showBackButton={true} />
-      <PageTitle title={'Buddy Store                ' + storeName} />
+      <PageTitle
+        title={'Buddy Store                                 ' + storeName}
+      />
       <TouchableWithoutFeedback onPress={handlepress}>
         <View style={{flex: 1}}>
           <View style={{top: -80, left: 4}}>

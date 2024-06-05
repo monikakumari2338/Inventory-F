@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import DonutChart from '../components/DonutChart';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
-
+import {IP} from '../IpAddress/CommonIP';
 const Demo = () => {
   const [inventoryData, setInventoryData] = useState({
     inStore: 0,
@@ -11,8 +11,7 @@ const Demo = () => {
   const {token} = BearerToken();
   useEffect(() => {
     // Replace with your actual API endpoint
-    const apiUrl =
-      'http://172.20.10.9:9022/product/dashboard/storeandtransit/getinventory';
+    const apiUrl = IP + '/product/dashboard/storeandtransit/getinventory';
 
     // Fetch data from the API
     fetch(apiUrl, {

@@ -14,6 +14,7 @@ import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import COLORS from './colors';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
+import {IP} from '../IpAddress/CommonIP';
 const Scanner = ({onScan}) => {
   const [result, setResult] = useState();
   const [productData, setProductData] = useState(null);
@@ -28,15 +29,12 @@ const Scanner = ({onScan}) => {
     //setScan(false);
 
     try {
-      const response = axios.get(
-        `http://172.20.10.9:9022/product/upc/${code}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      const response = axios.get(`${IP}/product/upc/${code}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
       const data = response.data;
       console.log('data', data);
       navigation.navigate('StockCheck', {productData: data});

@@ -22,6 +22,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {BottomSheet} from '@rneui/base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {BearerToken} from '../../BearerTokenContext/TokenContext';
+import {IP} from '../../IpAddress/CommonIP';
 
 export default function PoLanding() {
   const [Data, setData] = useState(null);
@@ -44,15 +45,12 @@ export default function PoLanding() {
 
   const poData = async () => {
     try {
-      const response = await axios.get(
-        `http://172.20.10.9:9022/purchaseOrder/getall/po/asn`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      const response = await axios.get(`${IP}/purchaseOrder/getall/po/asn`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
       const responseData = response.data;
       //console.log('CurrentDate data : ', responseData);
       setData(responseData);

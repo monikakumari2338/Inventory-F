@@ -28,6 +28,7 @@ import axios from 'axios';
 import {storeContext} from '../StoreContext/LoggedStoreContext';
 import Scanner from './Scanner';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
+import {IP} from '../IpAddress/CommonIP';
 
 const ItemScanner = () => {
   const [itemNumber, setItemNumber] = useState('');
@@ -90,7 +91,7 @@ const ItemScanner = () => {
       console.log('result', result);
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/product/getProductByitemNumber/${inputValue}/${val}`,
+          `${IP}/product/getProductByitemNumber/${inputValue}/${val}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -118,7 +119,7 @@ const ItemScanner = () => {
     } else {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/product/getProductByitemName/${inputValue}/${val}`,
+          `${IP}/product/getProductByitemName/${inputValue}/${val}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -171,7 +172,7 @@ const ItemScanner = () => {
     setItemNumber(selectedItemNumber);
     try {
       const response = await axios.get(
-        `http://172.20.10.9:9022/product/getProductByitemNumber/${selectedItemNumber}/${val}`,
+        `${IP}/product/getProductByitemNumber/${selectedItemNumber}/${val}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -207,7 +208,7 @@ const ItemScanner = () => {
     if (result === true) {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/product/getMatched/products/itemnumber/${input}`,
+          `${IP}/product/getMatched/products/itemnumber/${input}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -238,7 +239,7 @@ const ItemScanner = () => {
     } else {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/product/getMatched/products/Itemname/${input}`,
+          `${IP}/product/getMatched/products/Itemname/${input}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

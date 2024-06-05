@@ -20,6 +20,7 @@ import Dashboard from './Dashboard';
 import {useFocusEffect} from '@react-navigation/native';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
 import {storeContext} from '../StoreContext/LoggedStoreContext';
+import {IP} from '../IpAddress/CommonIP';
 const Login = ({navigation}) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [email, setEmail] = useState('');
@@ -43,10 +44,8 @@ const Login = ({navigation}) => {
   const loginData = async () => {
     try {
       const userData = {email, password, storeName};
-      const response = await axios.post(
-        'http://172.20.10.9:9022/api/auth/login',
-        userData,
-      );
+      const response = await axios.post(IP + '/api/auth/login', userData);
+      console.log(response);
       setToken(response.data.acessToken);
       console.log('Login successful');
       setLoginError(''); // Reset login error if login is successful
@@ -56,12 +55,12 @@ const Login = ({navigation}) => {
       setLoginError(error.response.data.message);
     }
   };
-
+  // const url1 = `${IP}/store/getallstores`;
+  // const url2 = IP + '/store/getallstores';
+  // console.log('Urls:', url1, url2);
   const fetchStoreData = async () => {
     try {
-      const response = await axios.get(
-        'http://172.20.10.9:9022/store/getallstores',
-      );
+      const response = await axios.get(IP + '/store/getallstores');
       const responseData = response.data;
       setStoreData(responseData);
     } catch (error) {

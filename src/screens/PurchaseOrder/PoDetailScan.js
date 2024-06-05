@@ -18,6 +18,7 @@ import Header from '../../components/Header';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {useEffect} from 'react';
 import {useCardContext} from './Context/CardContext';
+import {IP} from '../IpAddress/CommonIP';
 
 const PoDetailScan = () => {
   // const {item, type} = route.params;
@@ -33,16 +34,13 @@ const PoDetailScan = () => {
     console.log('upc', upc);
     try {
       //const upc = '10000012';
-      const store = 'Ambience Mall';
-      const response = await axios.get(
-        `http://172.20.10.9:8083/product/upcs/${upc}/${store}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      const store = 'Pacific Dwarka';
+      const response = await axios.get(`${IP}/product/upcs/${upc}/${store}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
       const responseData = response.data;
       console.log('responseData : ', responseData);
       if (responseData != undefined) {

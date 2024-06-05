@@ -26,7 +26,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useCardContext} from './Context/CardContext';
 import {FAB} from '@rneui/themed';
 import {BearerToken} from '../../BearerTokenContext/TokenContext';
-
+import {IP} from '../../IpAddress/CommonIP';
 const PoDetailPage = ({route}) => {
   const navigation = useNavigation();
   const {itemID, type, status} = route.params; //300001;
@@ -122,7 +122,7 @@ const PoDetailPage = ({route}) => {
 
     axios({
       method: 'post',
-      url: 'http://172.20.10.9:9022/purchaseOrder/save/draft/po',
+      url: IP + '/purchaseOrder/save/draft/po',
       data: savearr,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -171,7 +171,7 @@ const PoDetailPage = ({route}) => {
     const store = 'Pacific Dwarka';
     axios({
       method: 'post',
-      url: `http://172.20.10.9:9022/purchaseOrder/save/po_receive/${store}`,
+      url: `${IP}/purchaseOrder/save/po_receive/${store}`,
       data: savearr,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -247,7 +247,7 @@ const PoDetailPage = ({route}) => {
     if (type == 'ASN' && status != 'InProgress') {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/purchaseOrder/getitemsby/asnnumber/${itemID}`,
+          `${IP}/purchaseOrder/getitemsby/asnnumber/${itemID}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -273,7 +273,7 @@ const PoDetailPage = ({route}) => {
     if (type == 'PO' && status != 'InProgress') {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/purchaseOrder/findbyPO/${itemID}`,
+          `${IP}/purchaseOrder/findbyPO/${itemID}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -297,7 +297,7 @@ const PoDetailPage = ({route}) => {
     if (status == 'InProgress') {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/purchaseOrder/get/draft/items/${itemID}`,
+          `${IP}/purchaseOrder/get/draft/items/${itemID}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -328,7 +328,7 @@ const PoDetailPage = ({route}) => {
     let sku = [];
     try {
       const response = await axios.get(
-        `http://172.20.10.9:9022/product/getsku/${itemNumberInput}/${selectedColor}/${selectedSize}`,
+        `${IP}/product/getsku/${itemNumberInput}/${selectedColor}/${selectedSize}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -409,7 +409,7 @@ const PoDetailPage = ({route}) => {
     if (result === true) {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/product/getProductByitemNumber/${selectedItemNumber}/${val}`,
+          `${IP}/product/getProductByitemNumber/${selectedItemNumber}/${val}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -441,7 +441,7 @@ const PoDetailPage = ({route}) => {
     } else {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/product/getProductByitemName/${selectedItemNumber}/${val}`,
+          `${IP}/product/getProductByitemName/${selectedItemNumber}/${val}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -481,7 +481,7 @@ const PoDetailPage = ({route}) => {
       console.log('input ', input);
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/product/getMatched/products/itemnumber/${input}`,
+          `${IP}/product/getMatched/products/itemnumber/${input}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -513,7 +513,7 @@ const PoDetailPage = ({route}) => {
     } else {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/product/getMatched/products/Itemname/${input}`,
+          `${IP}/product/getMatched/products/Itemname/${input}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

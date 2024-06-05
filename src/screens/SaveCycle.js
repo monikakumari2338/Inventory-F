@@ -26,6 +26,7 @@ import Dashboard from './Dashboard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Polygon} from 'react-native-svg';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
+import {IP} from '../IpAddress/CommonIP';
 const SaveCycle = ({route}) => {
   const {data} = route.params;
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -288,7 +289,7 @@ const SaveCycle = ({route}) => {
 
     axios({
       method: 'post',
-      url: 'http://172.20.10.9:9022/savestockcount/save',
+      url: IP + '/savestockcount/save',
       data: savearr,
       headers: {
         Authorization: `Bearer ${token}`,

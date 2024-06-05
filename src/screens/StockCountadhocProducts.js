@@ -30,7 +30,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import SyncStorage from 'sync-storage';
 import {BearerToken} from '../BearerTokenContext/TokenContext.js';
-
+import {IP} from '../IpAddress/CommonIP';
 const StockCountadhocProducts = ({route}) => {
   const {products, reason, sku} = route.params;
   //console.log('products: ', products);
@@ -210,7 +210,7 @@ const StockCountadhocProducts = ({route}) => {
 
     axios({
       method: 'post',
-      url: 'http://172.20.10.9:9022/savestockcount/adhoc/count/creation',
+      url: IP + '/savestockcount/adhoc/count/creation',
       data: savearr,
       headers: {
         Authorization: `Bearer ${token}`,

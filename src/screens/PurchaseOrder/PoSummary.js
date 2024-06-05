@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 import PageTitle from '../../components/PageHeader';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {IP} from '../IpAddress/CommonIP';
 
 export default function PoSummary({route}) {
   const {item, type} = route.params;
@@ -29,7 +30,7 @@ export default function PoSummary({route}) {
     if (type == 'ASN') {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/purchaseOrder/completed/asnList/${item.asnNumber}`,
+          `${IP}/purchaseOrder/completed/asnList/${item.asnNumber}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -53,7 +54,7 @@ export default function PoSummary({route}) {
     } else {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/purchaseOrder/getPoSummary/${item.poNumber}`,
+          `${IP}/purchaseOrder/getPoSummary/${item.poNumber}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

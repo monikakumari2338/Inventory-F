@@ -2,7 +2,6 @@ import {StyleSheet, View, Text, Pressable} from 'react-native';
 import {Card, Chip, Icon} from '@rneui/themed';
 import {CardDivider} from '@rneui/base/dist/Card/Card.Divider';
 import {useNavigation} from '@react-navigation/native';
-import PoSummary from '../PoSummary';
 import {format} from 'date-fns';
 export default function RtvCard({item}) {
   const navigation = useNavigation();
@@ -19,22 +18,12 @@ export default function RtvCard({item}) {
         backgroundColor: 'white',
         elevation: 5,
       }}>
-      {item.asnNumber ? (
-        <View>
-          <Text style={styles.cardId}>ASN: {item.asnNumber}</Text>
-          <View style={styles.cardHeader}>
-            <ProgressChip progress={item.status} />
-          </View>
+      <View>
+        <Text style={styles.cardId}>Rtv Id: {item.rtvID}</Text>
+        <View style={styles.cardHeader}>
+          <ProgressChip progress={item.status} />
         </View>
-      ) : (
-        //<Text>{item.poNumber}</Text>
-        <View>
-          <Text style={styles.cardId}>PO: {item.poNumber}</Text>
-          <View style={styles.cardHeader}>
-            <ProgressChip progress={item.status} />
-          </View>
-        </View>
-      )}
+      </View>
 
       {/* <CardDivider /> */}
 
@@ -62,7 +51,7 @@ export default function RtvCard({item}) {
         <View>
           <View style={styles.cardContent}>
             <Text style={styles.cardData}>
-              Creation Date: {dateString(item.creationDate)}
+              Creation Date: {dateString(item.createdDate)}
             </Text>
           </View>
         </View>
@@ -74,7 +63,7 @@ export default function RtvCard({item}) {
               styles.cardData,
               {fontFamily: 'Montserrat-Bold', fontSize: 20},
             ]}>
-            {item.totalSKU}
+            {item.totalSkuv}
           </Text>
         </View>
 
@@ -94,7 +83,7 @@ export default function RtvCard({item}) {
 //Chip component to display progress
 function ProgressChip({progress}) {
   const chipData = {
-    Complete: {
+    Completed: {
       title: 'Complete',
       color: '#1a8a01',
       titleColor: 'white',

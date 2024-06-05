@@ -45,7 +45,7 @@ import KebabMenu from './src/screens/PurchaseOrder/kebabMenu';
 import PoDetailScan from './src/screens/PurchaseOrder/PoDetailScan';
 import {MyCardContextProvider} from './src/screens/PurchaseOrder/Context/CardContext';
 import {TokenProvider} from './src/BearerTokenContext/TokenContext';
-
+import RtvLanding from './src/screens/Return To Vendor/RtvLanding';
 const theme = createTheme({
   mode: 'light',
   lightColors: {
@@ -73,7 +73,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="CycleStart"
                   component={CycleStart}
@@ -81,7 +80,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="CountDtls"
                   component={CountDtls}
@@ -110,7 +108,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="SaveCycle"
                   component={SaveCycle}
@@ -118,7 +115,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="AdhocCountDetails"
                   component={AdhocCountDetails}
@@ -154,7 +150,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="ScheduledStockCountScan"
                   component={ScheduledStockCountScan}
@@ -162,7 +157,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="RecountStockCountScan"
                   component={RecountStockCountScan}
@@ -177,7 +171,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="AdhocRecount"
                   component={AdhocRecount}
@@ -185,7 +178,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 {/* <Stack.Screen
           name="PurchaseOrder"
           component={PurchaseOrder}
@@ -193,7 +185,6 @@ export default function App() {
             headerShown: false
           }}
         /> */}
-
                 <Stack.Screen
                   name="StoreData"
                   component={StoreData}
@@ -208,7 +199,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="BuddyStoreSearchedItem"
                   component={BuddyStoreSearchedItem}
@@ -216,7 +206,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="StoreMap"
                   component={StoreMap}
@@ -231,7 +220,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="Login"
                   component={Login}
@@ -288,7 +276,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="CustomBottomSheet"
                   component={CustomBottomSheet}
@@ -296,7 +283,6 @@ export default function App() {
                     headerShown: false,
                   }}
                 />
-
                 <Stack.Screen
                   name="PoCard"
                   component={PoCard}
@@ -349,6 +335,13 @@ export default function App() {
                 <Stack.Screen
                   name="PoDetailScan"
                   component={PoDetailScan}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="RtvLanding"
+                  component={RtvLanding}
                   options={{
                     headerShown: false,
                   }}

@@ -13,6 +13,7 @@ import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import RNFS from 'react-native-fs';
 import COLORS from '../../../constants/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {IP} from '../IpAddress/CommonIP';
 export default function PoDiscrepancySummary({route}) {
   const {discrepancyData, item, type} = route.params;
   const navigation = useNavigation();
@@ -118,8 +119,7 @@ export default function PoDiscrepancySummary({route}) {
       });
 
       // Send the FormData in the POST request
-      const apiUrl =
-        'http://172.20.10.9:9022/purchaseOrder/send/Po_Discrepancy/Email'; // Replace with your actual API endpoint
+      const apiUrl = IP + '/purchaseOrder/send/Po_Discrepancy/Email'; // Replace with your actual API endpoint
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,

@@ -28,7 +28,8 @@ import {useNavigation} from '@react-navigation/native';
 
 import RNFS from 'react-native-fs';
 import {json} from 'react-router-dom';
-import {BearerToken} from '../../BearerTokenContext/TokenContext';
+import {BearerToken} from '../BearerTokenContext/TokenContext';
+import {IP} from '../IpAddress/CommonIP';
 
 const AdhocPostVrnc = ({route}) => {
   const {countDetails} = route.params || {};
@@ -223,7 +224,7 @@ const AdhocPostVrnc = ({route}) => {
       });
 
       // Send the FormData in the POST request
-      const apiUrl = 'http://172.20.10.9:9022/savestockcount/mail'; // Replace with your actual API endpoint
+      const apiUrl = IP + '/savestockcount/mail'; // Replace with your actual API endpoint
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,

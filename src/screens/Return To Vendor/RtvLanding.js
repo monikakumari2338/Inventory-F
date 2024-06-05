@@ -22,6 +22,7 @@ import {BottomSheet} from '@rneui/base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {BearerToken} from '../../BearerTokenContext/TokenContext';
 import RtvCard from './LandingComp/RtvCard';
+import {IP} from '../../IpAddress/CommonIP';
 
 export default function RtvLanding() {
   const [Data, setData] = useState(null);
@@ -44,15 +45,12 @@ export default function RtvLanding() {
 
   const rtvData = async () => {
     try {
-      const response = await axios.get(
-        `http://172.20.10.9:9022/returntovendor/getallrtv`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      const response = await axios.get(`${IP}/returntovendor/getallrtv`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
       const responseData = response.data;
       //console.log('CurrentDate data : ', responseData);
       setData(responseData);
@@ -66,11 +64,11 @@ export default function RtvLanding() {
   };
   console.log('RTV DATA: ', Data);
   useEffect(() => {
-    poData();
+    rtvData();
   }, []);
   useFocusEffect(
     React.useCallback(() => {
-      poData();
+      rtvData();
     }, []),
   );
 

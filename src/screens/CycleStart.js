@@ -24,6 +24,7 @@ import Dashboard from './Dashboard';
 import ItemScanner from './ItemScanner.js';
 import PoLanding from './PurchaseOrder/PoLanding';
 import {BearerToken} from '../BearerTokenContext/TokenContext.js';
+import {IP} from '../IpAddress/CommonIP';
 
 const CycleStart = ({route}) => {
   const {data} = route.params;
@@ -247,7 +248,7 @@ const CycleStart = ({route}) => {
 
     axios({
       method: 'post',
-      url: 'http://172.20.10.9:9022/savestockcount/save',
+      url: IP + '/savestockcount/save',
       data: savearr,
       headers: {
         Authorization: `Bearer ${token}`,

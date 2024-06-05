@@ -20,7 +20,8 @@ import Footer1 from '../components/Footer1';
 import COLORS from './colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RecountStockCountScan from './RecountStockCountScan';
-import {BearerToken} from '../../BearerTokenContext/TokenContext';
+import { BearerToken } from '../BearerTokenContext/TokenContext';
+import {IP} from '../IpAddress/CommonIP';
 
 const AdhocRecount = ({route}) => {
   const {data} = route.params;
@@ -137,7 +138,7 @@ const AdhocRecount = ({route}) => {
 
     axios({
       method: 'post',
-      url: 'http://172.20.10.9:9022/savestockcount/save/adhoc/recount',
+      url: IP+'/savestockcount/save/adhoc/recount',
       data: savearr,
       headers: {
         Authorization: `Bearer ${token}`,

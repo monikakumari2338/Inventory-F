@@ -28,7 +28,7 @@ import {useNavigation} from '@react-navigation/native';
 import StockCountadhocProducts from './StockCountadhocProducts';
 import {Alert} from 'react-native';
 import {BearerToken} from '../BearerTokenContext/TokenContext.js';
-
+import {IP} from '../IpAddress/CommonIP';
 const StockCountadhoc = () => {
   const navigation = useNavigation();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -61,7 +61,7 @@ const StockCountadhoc = () => {
       setCheckedItems(prevCheckedItems => [...prevCheckedItems, item.id]);
     }
   };
-  console.log('Checked ' + checkedItems);
+  console.log('Checked  : ' + checkedItems);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -123,15 +123,12 @@ const StockCountadhoc = () => {
     const store = 'Pacific Dwarka';
     console.log('id: ', categoryid);
     axios
-      .get(
-        `http://172.20.10.9:9022/product/getall/productbycategory/${categoryid}/${store}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      .get(`${IP}/product/getall/productbycategory/${categoryid}/${store}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      )
+      })
       .then(response => {
         setCategoryProducts(response.data);
         // navigation.navigate('Postvrnc', {countDetails});
@@ -297,56 +294,60 @@ const StockCountadhoc = () => {
               </View>
             )}
 
-            <View style={styles.tableContainer}>
-              <View style={styles.tableHeader}>
-                <Text style={styles.headerText}> </Text>
-                <Text style={styles.headerText}>Item No.</Text>
-                <Text style={[styles.headerText]}>Size</Text>
-                <Text style={[styles.headerText]}>Color</Text>
-                <Text style={[styles.headerText]}>Qty</Text>
-              </View>
-              <View style={{height: 200, borderWidth: 0.5, width: 380}}>
-                <ScrollView style={[styles.container]}>
-                  {categoryProducts.map((item, index) => (
-                    <TouchableOpacity key={index}>
-                      <View style={styles.tableRow}>
-                        <TouchableOpacity
-                          onPress={() => toggleCheckbox(item)}
-                          style={{
-                            alignItems: 'center',
-                            flexDirection: 'row',
-                            alignContent: 'center',
-                          }}>
-                          {selectedItems[item.id] ? (
-                            <Iconn
-                              name="checkbox-outline"
-                              size={20}
-                              style={{fontWeight: '500', color: 'black'}}
-                            />
-                          ) : (
-                            <Iconn
-                              name="checkbox-blank-outline"
-                              size={20}
-                              style={{fontWeight: '500', color: 'black'}}
-                            />
-                          )}
-                          <Text style={{marginLeft: '2%'}}>{item.value}</Text>
-                        </TouchableOpacity>
-                        <Text style={[styles.rowText]}>
-                          {item.product.itemNumber}
-                        </Text>
+            {categoryProducts === null ? (
+              ''
+            ) : (
+              <View style={styles.tableContainer}>
+                <View style={styles.tableHeader}>
+                  <Text style={styles.headerText}> </Text>
+                  <Text style={styles.headerText}>Item No.</Text>
+                  <Text style={[styles.headerText]}>Size</Text>
+                  <Text style={[styles.headerText]}>Color</Text>
+                  <Text style={[styles.headerText]}>Qty</Text>
+                </View>
+                <View style={{height: 200, borderWidth: 0.5, width: 380}}>
+                  <ScrollView style={[styles.container]}>
+                    {categoryProducts.map((item, index) => (
+                      <TouchableOpacity key={index}>
+                        <View style={styles.tableRow}>
+                          <TouchableOpacity
+                            onPress={() => toggleCheckbox(item)}
+                            style={{
+                              alignItems: 'center',
+                              flexDirection: 'row',
+                              alignContent: 'center',
+                            }}>
+                            {selectedItems[item.id] ? (
+                              <Iconn
+                                name="checkbox-outline"
+                                size={20}
+                                style={{fontWeight: '500', color: 'black'}}
+                              />
+                            ) : (
+                              <Iconn
+                                name="checkbox-blank-outline"
+                                size={20}
+                                style={{fontWeight: '500', color: 'black'}}
+                              />
+                            )}
+                            <Text style={{marginLeft: '2%'}}>{item.value}</Text>
+                          </TouchableOpacity>
+                          <Text style={[styles.rowText]}>
+                            {item.product.itemNumber}
+                          </Text>
 
-                        <Text style={[styles.rowText]}>{item.size}</Text>
-                        <Text style={[styles.rowText]}>{item.color}</Text>
-                        <Text style={[styles.rowText]}>
-                          {item.sellableStock}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  ))}
-                </ScrollView>
+                          <Text style={[styles.rowText]}>{item.size}</Text>
+                          <Text style={[styles.rowText]}>{item.color}</Text>
+                          <Text style={[styles.rowText]}>
+                            {item.sellableStock}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    ))}
+                  </ScrollView>
+                </View>
               </View>
-            </View>
+            )}
 
             <Pressable style={styles.button} onPress={handleStartCountButton}>
               <Text style={styles.EODbtn}>Start Count </Text>

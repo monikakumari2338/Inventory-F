@@ -32,7 +32,7 @@ import {storeContext} from '../StoreContext/LoggedStoreContext';
 import PageTitle from '../components/PageHeader.js';
 
 const BuddyStoreSearchedItem = ({route}) => {
-  const {productData} = route.params;
+  const {productData, storeName} = route.params;
   const {value} = storeContext();
   const navigation = useNavigation();
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -93,10 +93,11 @@ const BuddyStoreSearchedItem = ({route}) => {
     product => product.color === selectedColor && product.size === selectedSize,
   );
 
+  //console.log(storeName);
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
       <Header showBackButton={true} />
-      <PageTitle title={'Buddy Store Stock Check'} />
+      <PageTitle title={'Buddy Store Stock Check          ' + storeName} />
       <TouchableWithoutFeedback onPress={handlepress}>
         <View style={{flex: 1}}>
           <View style={{top: -80, left: 4}}>

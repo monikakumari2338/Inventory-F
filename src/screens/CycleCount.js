@@ -25,6 +25,7 @@ import PoLanding from './PurchaseOrder/PoLanding';
 
 import PageTitle from '../components/PageHeader.js';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
+import {IP} from '../IpAddress/CommonIP';
 
 import moment from 'moment-timezone';
 const CycleCount = ({route}) => {
@@ -49,7 +50,7 @@ const CycleCount = ({route}) => {
     try {
       const currentDate = new Date().toISOString().split('T')[0];
       const response = await axios.get(
-        `http://172.20.10.9:9022/stockcount/getProductsbydate/${currentDate}/${store}`,
+        `${IP}/stockcount/getProductsbydate/${currentDate}/${store}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -89,7 +90,7 @@ const CycleCount = ({route}) => {
   const fetchAdhocStockCountData = async () => {
     try {
       const response = await axios.get(
-        `http://172.20.10.9:9022/savestockcount/getall/adhoc/count`,
+        `${IP}/savestockcount/getall/adhoc/count`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -174,15 +175,12 @@ const CycleCount = ({route}) => {
   //console.log('expandedId ', expandedId);
   const handleDetailsPress = countId => {
     axios
-      .get(
-        `http://172.20.10.9:9022/savestockcount/getstockproducts/${countId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      .get(`${IP}/savestockcount/getstockproducts/${countId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      )
+      })
       .then(response => {
         const countDetails = response.data;
         navigation.navigate('CountDtls', {countDetails});
@@ -202,15 +200,12 @@ const CycleCount = ({route}) => {
   const handleRecount = countId => {
     //const countId = countDetails[0].stockcount.countId;
     axios
-      .get(
-        `http://172.20.10.9:9022/savestockcount/getstockproducts/${countId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      .get(`${IP}/savestockcount/getstockproducts/${countId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      )
+      })
       .then(response => {
         const countDetails = response.data;
         const keyToFilter = 'varianceQty';
@@ -223,11 +218,11 @@ const CycleCount = ({route}) => {
         console.log('Recount Error fetching count details:', error);
       });
   };
-  // console.log('pendingdata todays count', pendingdata);
+  console.log('pendingdata todays count', pendingdata);
   const handleAdhocRecount = adhocId => {
     //console.log('adhoc id', adhocId);
     axios
-      .get(`http://172.20.10.9:9022/savestockcount/get/adhoc/${adhocId}`, {
+      .get(`${IP}/savestockcount/get/adhoc/${adhocId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -252,15 +247,12 @@ const CycleCount = ({route}) => {
 
   const handlePostvar = countId => {
     axios
-      .get(
-        `http://172.20.10.9:9022/savestockcount/getstockproducts/${countId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      .get(`${IP}/savestockcount/getstockproducts/${countId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      )
+      })
       .then(response => {
         const countDetails = response.data;
         navigation.navigate('Postvrnc', {countDetails});
@@ -274,7 +266,7 @@ const CycleCount = ({route}) => {
   };
   const handleAdhocPostvar = adhocId => {
     axios
-      .get(`http://172.20.10.9:9022/savestockcount/get/adhoc/${adhocId}`, {
+      .get(`${IP}/savestockcount/get/adhoc/${adhocId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -317,7 +309,7 @@ const CycleCount = ({route}) => {
     try {
       const currentDate = new Date().toISOString().split('T')[0];
       const response = await axios.get(
-        `http://172.20.10.9:9022/stockcount/getProductsbydate/${currentDate}`,
+        `${IP}/stockcount/getProductsbydate/${currentDate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -349,15 +341,12 @@ const CycleCount = ({route}) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        'http://172.20.10.9:9022/savestockcount/getinfolist',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+      const response = await axios.get(IP + '/savestockcount/getinfolist', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
       const responseData = response.data;
       const pendingList = responseData?.pendingList || [];
       const stockCountInfoList = responseData?.stockCountInfoList || [];
@@ -401,7 +390,7 @@ const CycleCount = ({route}) => {
   const handleCount = async countId => {
     try {
       const response = await axios.get(
-        `http://172.20.10.9:9022/stockcount/getpending/stockproducts/${countId}`,
+        `${IP}/stockcount/getpending/stockproducts/${countId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -500,13 +489,41 @@ const CycleCount = ({route}) => {
                           fontSize: 18,
                           color: 'black',
                           fontWeight: 500,
-                          top: '20%',
+                          top: '-1%',
                         }}>
                         {currentDate}
                       </Text>
-                      <Text>
-                        {/* CountId: {pendingdata.creationProductsdto[0].countId} */}
-                      </Text>
+                      {/* <View
+                        style={{
+                          flexDirection: 'row',
+                          //flexWrap: 'wrap',
+                          padding: 2,
+                          marginBottom: '1%',
+                          // marginHorizontal: 4,
+                          justifyContent: 'space-between',
+                        }}> */}
+                      {pendingdata.creationdto == null ? (
+                        ''
+                      ) : (
+                        <Text>
+                          Category: {pendingdata.creationdto.category}
+                        </Text>
+                      )}
+                      {pendingdata.creationdto == null ? (
+                        ''
+                      ) : (
+                        <Text>
+                          Total Items: {pendingdata.creationdto.totalItems}
+                        </Text>
+                      )}
+                      {pendingdata.creationdto == null ? (
+                        ''
+                      ) : (
+                        <Text>
+                          Total BookQty: {pendingdata.creationdto.totalBookQty}
+                        </Text>
+                      )}
+
                       <TouchableOpacity
                         style={styles.StartButton}
                         onPress={() => handleTodaydata()}>
@@ -1032,7 +1049,7 @@ const styles = StyleSheet.create({
   StartButton: {
     position: 'absolute',
     //bottom: "-200%",
-    top: '-244%',
+    top: '-111%',
     right: -10,
     backgroundColor: COLORS.primary,
     paddingVertical: 10,

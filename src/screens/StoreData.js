@@ -24,7 +24,7 @@ import PoLanding from './PurchaseOrder/PoLanding';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-
+import {IP} from '../IpAddress/CommonIP';
 import SideMenu from './SideMenu';
 import Dashboard from './Dashboard';
 import {useNavigation} from '@react-navigation/native';
@@ -160,7 +160,7 @@ const StoreData = ({route}) => {
     const fetchStoreData = async () => {
       try {
         const response = await axios.get(
-          `http://172.20.10.9:9022/store/buddystores/${itemNumber}/${color}/${size}`,
+          `${IP}/store/buddystores/${itemNumber}/${color}/${size}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

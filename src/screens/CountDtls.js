@@ -25,6 +25,7 @@ import Dashboard from './Dashboard';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
+import {IP} from '../IpAddress/CommonIP';
 
 const CountDtls = ({route}) => {
   const {countDetails} = route.params || {};
@@ -73,15 +74,12 @@ const CountDtls = ({route}) => {
     if (countDetails && countDetails.length > 0) {
       const countId = countDetails[0].stockcount.countId;
       axios
-        .get(
-          `http://172.20.10.9:9022/savestockcount/getstockproducts/${countId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
+        .get(`${IP}/savestockcount/getstockproducts/${countId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
-        )
+        })
         .then(response => {
           const countDetails = response.data;
           const keyToFilter = 'varianceQty';

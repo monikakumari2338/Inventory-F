@@ -19,7 +19,7 @@ import {Card, Paragraph} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import CycleCount from './CycleCount.js';
 import ItemScanner from './ItemScanner.js';
-
+import RtvLanding from './Return To Vendor/RtvLanding.js';
 import PieChartCard from '../components/PieChartCard.js';
 import DoughnutChartCard from '../components/DoughnutChartCard.js';
 import Demo from './Demo.js';
@@ -69,7 +69,7 @@ function Dashboard() {
     {id: '2', name: 'Po Receive', screen: 'PoLanding'},
     {id: '3', name: 'Direct Store Delivery', screen: 'ItemScanner'},
     {id: '4', name: 'Transfer Receive', screen: 'ItemScanner'},
-    {id: '5', name: 'Return to Vendor', screen: 'ItemScanner'},
+    {id: '5', name: 'Return to Vendor', screen: 'RtvLanding'},
     {id: '6', name: 'Inventory Adjustment', screen: 'ItemScanner'},
     {id: '7', name: 'Stock Count', screen: 'CycleCount'},
     {id: '8', name: 'Login', screen: 'ItemScanner'},

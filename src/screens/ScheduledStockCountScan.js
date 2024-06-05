@@ -13,7 +13,7 @@ import Header from '../components/Header';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
-
+import {IP} from '../IpAddress/CommonIP';
 const ScheduledStockCountScan = ({route}) => {
   const {products, reason} = route.params;
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ const ScheduledStockCountScan = ({route}) => {
   const handleIconClick = async () => {
     try {
       const response = await axios.get(
-        `http://172.20.10.9:9022/product/findbysku/${inputValue}/${storeVal}`,
+        `${IP}/product/findbysku/${inputValue}/${storeVal}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

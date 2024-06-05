@@ -30,7 +30,7 @@ import RNFS from 'react-native-fs';
 import {json} from 'react-router-dom';
 import PageTitle from '../components/PageHeader.js';
 import {BearerToken} from '../BearerTokenContext/TokenContext';
-
+import {IP} from '../IpAddress/CommonIP';
 const Postvrnc = ({route}) => {
   const {countDetails} = route.params || {};
   console.log('countDetails : ', countDetails);
@@ -219,7 +219,7 @@ const Postvrnc = ({route}) => {
       });
 
       // Send the FormData in the POST request
-      const apiUrl = 'http://172.20.10.9:9022/savestockcount/mail'; // Replace with your actual API endpoint
+      const apiUrl = IP + '/savestockcount/mail'; // Replace with your actual API endpoint
       const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
